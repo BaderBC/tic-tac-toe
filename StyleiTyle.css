@@ -1,0 +1,83 @@
+/*
+Made by Tomasz Mamala
+
+https://tmamala.pl
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+body{
+    background-color: #ccffcc;
+    color: black;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Raleway', sans-serif;
+    font-size: 25px;
+}
+
+#main-div{
+    background-color: rgba(77, 252, 252, 0.178);
+    width: 600px;
+    height: 600px;
+    z-index: 0;
+}
+
+#main-div div{
+    border: 2px solid green;
+    height: 200px;
+    width: 200px;
+}
+
+table{
+    height: 600px;
+    border-spacing: 0;
+    border-color: transparent;
+}
+
+td{
+    border: 2px solid black;
+    text-align: center;
+    width: 33%;
+    height: 180px;
+    font-size: 35px;
+}
+
+#reset{
+    background-color: gray;
+    border-radius: 100px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 25px;
+    font-size: 20px;
+    color: white;
+    transition: 400ms ease-in-out;
+}
+
+p{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-bottom: 2rem;
+}
+
+h1{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-top: 1rem;
+}
+
+#reset:hover{
+    background-color: white;
+    color: black;
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+    margin-top: 20px;
+    transition: 400ms ease-in-out;
+}
