@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./StyleiTyle.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tic-tac-toe</title>
+    <link type="image/png" sizes="16x16" rel="icon" href="icons8-dick-16.png" />
+  </head>
+  <body>
+    <script src="./index.js" defer></script>
+    <h1>Tic-tac-toe</h1>
+    <p id="now">Tura x</p>
+    <div id="main-div">
+      <table style="width: 100%; border: 2px solid black">
+        <tr>
+          <td onclick="mainfunction('0')" id="0"></td>
+          <td onclick="mainfunction('1')" id="1"></td>
+          <td onclick="mainfunction('2')" id="2"></td>
+        </tr>
+        <tr>
+          <td onclick="mainfunction('3')" id="3"></td>
+          <td onclick="mainfunction('4')" id="4"></td>
+          <td onclick="mainfunction('5')" id="5"></td>
+        </tr>
+        <tr>
+          <td onclick="mainfunction('6')" id="6"></td>
+          <td onclick="mainfunction('7')" id="7"></td>
+          <td onclick="mainfunction('8')" id="8"></td>
+        </tr>
+      </table>
+    </div>
+    <button id="reset">Click to reset !</button>
+    <label for="mode">test</label>
+    <input onclick="mode()" name="mode" id="mode" type="checkbox">
+  </body>
+</html>
