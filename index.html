@@ -15,24 +15,26 @@
     <div id="main-div">
       <table style="width: 100%; border: 2px solid black">
         <tr>
-          <td onclick="mainfunction('0')" id="0"></td>
-          <td onclick="mainfunction('1')" id="1"></td>
-          <td onclick="mainfunction('2')" id="2"></td>
+          <td onclick="mainFunction('0')" id="0" class="field"></td>
+          <td onclick="mainFunction('1')" id="1" class="field"></td>
+          <td onclick="mainFunction('2')" id="2" class="field"></td>
         </tr>
         <tr>
-          <td onclick="mainfunction('3')" id="3"></td>
-          <td onclick="mainfunction('4')" id="4"></td>
-          <td onclick="mainfunction('5')" id="5"></td>
+          <td onclick="mainFunction('3')" id="3" class="field"></td>
+          <td onclick="mainFunction('4')" id="4" class="field"></td>
+          <td onclick="mainFunction('5')" id="5" class="field"></td>
         </tr>
         <tr>
-          <td onclick="mainfunction('6')" id="6"></td>
-          <td onclick="mainfunction('7')" id="7"></td>
-          <td onclick="mainfunction('8')" id="8"></td>
+          <td onclick="mainFunction('6')" id="6" class="field"></td>
+          <td onclick="mainFunction('7')" id="7" class="field"></td>
+          <td onclick="mainFunction('8')" id="8" class="field"></td>
         </tr>
       </table>
     </div>
-    <button id="reset">Click to reset !</button>
-    <label for="mode">test</label>
-    <input onclick="mode()" name="mode" id="mode" type="checkbox">
+    <button id="reset" onclick="endAndStart(false)">Click to reset !</button>
+    <label id="mode-label" for="mode">Dark mode: </label>
+    <input autocomplete="off" onclick="mode()" name="mode" id="mode" type="checkbox">
+
+    <button>back <--</button><button>restore --></button>
   </body>
 </html>

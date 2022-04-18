@@ -7,7 +7,7 @@ let turn = "x",
     numberturn = true,
     field = [];
 
-function mainfunction(id) {
+function mainFunction(id) {
   let sid = document.getElementById(id);
   sid.onclick = '#';
   field[parseInt(id)] = numberturn;
@@ -26,11 +26,28 @@ function tester() {
     rowAndColumnValidation(2,4,6,1,1)])
 
   if (set1.has("1")) {
-    console.log("x wygrał");
+    endAndStart(true)
     document.getElementById("now").innerHTML = "Wygrał x";
   } else if (set1.has("0")) {
-    console.log("o wygrał");
+    endAndStart(true)
     document.getElementById("now").innerHTML = "Wygrał o";
+  }
+}
+
+function endAndStart(rmOnClickOrAdd){
+  if(rmOnClickOrAdd) {
+    for (let fieldId of document.getElementsByClassName("field")) {
+      fieldId.setAttribute("onClick", "#");
+    }
+  }else {
+    for (let fieldId of [0,1,2,3,4,5,6,7,8]) {
+      document.getElementById(fieldId).setAttribute("onClick", 'mainFunction(' + fieldId + ')');
+      document.getElementById(fieldId).innerHTML = "";
+      turn = "x";
+      document.getElementById("now").innerHTML = "Tura x";
+      numberturn = true;
+      field[fieldId] = null;
+    }
   }
 }
 
@@ -51,6 +68,14 @@ function rowAndColumnValidation(id1, id2, id3, times, increment) {
 }
 
 function mode() {
-  let value = document.getElementById("mode").value
-  console.log(value);
+  let value = document.getElementById("mode").checked
+  if(value) {
+    document.body.style.backgroundColor = "rgba(0,0,0,0.64)"
+    document.getElementById("main-div").style.backgroundColor = "#c7c7c7"
+    document.getElementById("mode-label").innerHTML = "Default mode: "
+  } else{
+    document.body.style.backgroundColor = "#cfc"
+    document.getElementById("main-div").style.backgroundColor = "rgba(77, 252, 252, 0.178)"
+    document.getElementById("mode-label").innerHTML = "Dark mode: "
+  }
 }
