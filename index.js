@@ -3,26 +3,27 @@ Made by Bartłomiej Strama
 
 https://bstrama.com
 */
-let turn = "x",
-    numberturn = true,
-    field = [];
+var turn = "x",
+    numberTurn = true,
+    field;
 
 function onLoad(){
   mode()
 }
 
-function mainFunction(id) {
-  let sid = document.getElementById(id);
+function mainFunction(field0, field1) {
+  let sid = document.getElementById(parseInt('${field0}${field1}'));
+  console.log(parseInt(`${field0}${field1}`))
   sid.onclick = '#';
-  field[parseInt(id)] = numberturn;
+  field[field0][field1] = numberTurn;
   sid.innerHTML = turn;
-  numberturn = !numberturn;
-  turn = numberturn ? "x" : "o";
+  numberTurn = !numberTurn;
+  turn = numberTurn ? "x" : "o";
   document.getElementById("now").innerHTML = "Tura " + turn;
-  tester();
+  winValidation();
 }
 
-function tester() {
+function winValidation() {
   let set1 = new Set([
     rowAndColumnValidation(0,1,2,9, 3),
     rowAndColumnValidation(0,3,6,3, 1),
@@ -40,16 +41,16 @@ function tester() {
 
 function endAndStart(rmOnClickOrAdd){
   if(rmOnClickOrAdd) {
-    for (let fieldId of document.getElementsByClassName("field")) {
+    for (let fieldId of document.getElementsByClassName("box")) {
       fieldId.setAttribute("onClick", "#");
     }
   }else {
     for (let fieldId of [0,1,2,3,4,5,6,7,8]) {
-      document.getElementById(fieldId).setAttribute("onClick", 'mainFunction(' + fieldId + ')');
+      document.getElementById(fieldId).setAttribute("onClick", `mainFunction(${fieldId}`);
       document.getElementById(fieldId).innerHTML = "";
       turn = "x";
       document.getElementById("now").innerHTML = "Tura x";
-      numberturn = true;
+      numberTurn = true;
       field[fieldId] = null;
     }
   }
