@@ -33,7 +33,8 @@ function tester() {
     endAndStart(true)
     document.getElementById("now").innerHTML = "Wygrał x";
   } else if (set1.has("0")) {
-    endAndStart(true)
+    console.log("chuj");
+     endAndStart(true)
     document.getElementById("now").innerHTML = "Wygrał o";
   }
 }
