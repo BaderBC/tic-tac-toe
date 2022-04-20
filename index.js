@@ -7,6 +7,10 @@ let turn = "x",
     numberturn = true,
     field = [];
 
+function onLoad(){
+  mode()
+}
+
 function mainFunction(id) {
   let sid = document.getElementById(id);
   sid.onclick = '#';

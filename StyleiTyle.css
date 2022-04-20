@@ -77,7 +77,6 @@ h1{
     color: black;
     -webkit-transition: background-color 400ms linear;
     -ms-transition: background-color 400ms linear;
-    transition: background-color 400ms linear;
     margin-top: 20px;
     transition: 400ms ease-in-out;
 }

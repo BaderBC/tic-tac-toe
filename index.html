@@ -8,7 +8,7 @@
     <title>tic-tac-toe</title>
     <link type="image/png" sizes="16x16" rel="icon" href="icons8-dick-16.png" />
   </head>
-  <body>
+  <body onload="onLoad()">
     <script src="./index.js" defer></script>
     <h1>Tic-tac-toe</h1>
     <p id="now">Tura x</p>
@@ -33,7 +33,7 @@
     </div>
     <button id="reset" onclick="endAndStart(false)">Click to reset !</button>
     <label id="mode-label" for="mode">Dark mode: </label>
-    <input autocomplete="off" onclick="mode()" name="mode" id="mode" type="checkbox">
+    <input onclick="mode()" name="mode" id="mode" type="checkbox">
 
     <button>back <--</button><button>restore --></button>
   </body>
