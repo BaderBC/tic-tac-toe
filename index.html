@@ -10,16 +10,18 @@
   </head>
   <body onload="onLoad()">
     <script src="./index.js" defer></script>
+    <script src="./mode.js" defer></script>
     <div class="header">
       <h1>Tic-tac-toe</h1>
       <p id="now">Tura x</p>
+      <div class="mode">
+        <label for="mode" id="labelmode">Mode : &#9728;&#65039;</label><br />
+        <input type="checkbox" name="mode" id="mode" onclick="mode()" />
+      </div>
       <button id="reset">Click to reset !</button>
     </div>
     <div id="main-div">
       <div class="big-flex">
-
-
-
         <div class="small-flex lastn">
           <div class="box bigger" id="00" onclick="mainFunction(0, 0)"></div>
           <div class="box smalls" id="01" onclick="mainFunction(0, 1)"></div>
@@ -59,9 +61,6 @@
           <div class="box smalls" id="43" onclick="mainFunction(4, 3)"></div>
           <div class="box bigger" id="44" onclick="mainFunction(4, 4)"></div>
         </div>
-
-
-
       </div>
     </div>
   </body>

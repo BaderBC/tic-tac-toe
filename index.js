@@ -64,7 +64,8 @@ function endAndStart(rmOnClickOrAdd){
 function rowAndColumnValidation(rowOrColumn) {
   for (let i0 = 0; i0 < columns; i0++){
     for (let i1 = 0; i1 < rows - 2; i1++){
-      let fieldSet = [ field[[i0, i1]], field[[i0 + rowOrColumn, i1 + rowOrColumn]], field[[i0 + 2, i1 +2]] ]
+
+      let fieldSet = [ field[[i0, i1]], field[[i0 + 1, i1 + 1]], field[[i0 + 2, i1 +2]] ]
       if(fieldSet.indexOf(1) + 1){
         return [true].concat(fieldSet);
       }else if(fieldSet.indexOf(0) + 1){
