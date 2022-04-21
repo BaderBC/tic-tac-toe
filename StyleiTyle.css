@@ -63,6 +63,7 @@ body{
 }
 
 .bigger, .last, .lastn{
+    display: none;
 }
 
 .box{

@@ -5,24 +5,26 @@ https://bstrama.com
 */
 var turn = "x",
     numberTurn = true,
-    field;
+    field = [];
 
 function onLoad(){
-  mode()
+  /* mode() */
+  let papiez = Math.floor(Math.random() * 2137 + 1);
+  console.log(papiez);
 }
 
 function mainFunction(field0, field1) {
-  let sid = document.getElementById(parseInt('${field0}${field1}'));
-  console.log(parseInt(`${field0}${field1}`))
-  sid.onclick = '#';
-  field[field0][field1] = numberTurn;
-  sid.innerHTML = turn;
+  let sid = document.getElementById(`${field0}${field1}`);
+  console.log(parseInt(`${field0}${field1}`), sid)
+  sid.setAttribute('onclick', '')
+  field[[field0, field1]] = numberTurn;
+  sid.innerHTML = `<p>${turn}</p>`;
   numberTurn = !numberTurn;
   turn = numberTurn ? "x" : "o";
   document.getElementById("now").innerHTML = "Tura " + turn;
-  winValidation();
+  /*winValidation();*/
 }
-
+/*
 function winValidation() {
   let set1 = new Set([
     rowAndColumnValidation(0,1,2,9, 3),
@@ -84,3 +86,4 @@ function mode() {
     document.getElementById("mode-label").innerHTML = "Dark mode: "
   }
 }
+*/
