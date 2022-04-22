@@ -1,6 +1,6 @@
 function mode() {
-  let root = document.documentElement;
-  let value = document.getElementById("mode").checked;
+  let root = document.documentElement,
+      value = document.getElementById("mode").checked;
 
   if (value) {
     root.style.setProperty("--text-clr", "#fff");
