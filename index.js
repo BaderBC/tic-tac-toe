@@ -26,7 +26,8 @@ function mainFunction(field0, field1) {
 
 function winValidation(field0, field1) {
   let set = [
-      rowAndColumnValidation(field0, field1)
+      rowAndColumnValidation(field0, field1),
+      crossValidation(field0, field1)
   ]
   if (set.indexOf(true) + 1) {
     //endAndStart(true)
@@ -54,62 +55,55 @@ function endAndStart(rmOnClickOrAdd){
     }
   }
 }
-/*
-function rowAndColumnValidation(isRowNotColumn) {
-  let i0 = null, i1 = null, l = null, j = null, i = null,
-      fieldSet = [];
-  for (i = 0; columns > i; i++){
-    for (j = 0; rows > j; j++){
-      console.log(i, j)
-      i0 = isRowNotColumn? i:j;
-      i1 = isRowNotColumn? j:i;
-      fieldSet = [ field[[i0, i1]], field[[i0, i1 + 1]], field[[i0, i1 + 2]] ];
-      //console.log(i, j)
-      if(fieldSet.every(x => x === true) || fieldSet.every(x => x === false)){
-        for (l = 0; l < fieldSet.length; l++){
-          field[[i0, i1 + l]] = null;
-        }
-        console.log(fieldSet[0], fieldSet[1], fieldSet[2])
-        console.log('gg')
-        return fieldSet[0];
-      }else{
 
-        break;
-      }
-    }
-  }
-} */
 
 function rowAndColumnValidation(field0, field1){
   let fieldSet = [],
-      i = 0,
       j = 0,
-      x = [];
+      i,
+      leftSide = Array(3),
+      rightSide = Array(3);
 
   for (; j < 2; j++) {
-    if(j){
-      x[1] = 0;
-      x[3] = 0;
-    }else{
-      x[0] = 0
-      x[2] = 0
-    }
+    for (i of [0,1,2]) {
+      j? leftSide = Array(3).fill().map((_, index) => i - index)
+      : rightSide = Array(3).fill().map((_, index) => i - index)
 
-    for (; i < 3; i++) {
-      x[0] = j? i-2:0;
-      x[1] = j? 0:i-2;
-      x[2] = j? i-1:0;
-      x[3] = j? 0:i-1;
+      j? rightSide.fill(0): leftSide.fill(0);
 
       fieldSet = [
-        field[[field0 + x[0], field1 + x[1] ]],
-        field[[field0 + x[2], field1 + x[3] ]],
-        field[[field0, field1]] ]
-      if(fieldSet.every(x => x === true) || fieldSet.every(x => x === false)){
-        // zrób nullowanie ;)
+        field[[field0 + leftSide[2], field1 + rightSide[2] ]],
+        field[[field0 + leftSide[1], field1 + rightSide[1] ]],
+        field[[field0 + leftSide[0], field1 + rightSide[0] ]] ]
+      if (fieldSet.every(x => x === true) || fieldSet.every(x => x === false)) {
+        field[[field0 + leftSide[0], field1 + rightSide[0]]] =
+            field[[field0 + leftSide[1], field1 + rightSide[1]]] =
+                field[[field0 + leftSide[2], field1 + rightSide[2]]] = null
         return fieldSet[2]
-      }else{
-        break;
+      }
+    }
+  }
+}
+
+
+function crossValidation(field0, field1){
+  let fieldSet = [],
+      i,
+      c,
+      l;
+
+  for (c of [-1, 0, 1]){
+    for (i of [-1, 1]){
+      l = (i === 1)? -1 * c:c;
+      fieldSet = [
+        field[[field0 - 1 + l, field1 + i + c]],
+        field[[field0 + l, field1 + c]],
+        field[[field0 + 1 + l, field1 - i + c]] ]
+      if (fieldSet.every(x => x === true) || fieldSet.every(x => x === false)) {
+        field[[field0 + 1 - c, field1 + i + c]] =
+            field[[field0 - c, field1 + c]] =
+                field[[field0 - 1 - c, field1 - i + c]] = null;
+        return fieldSet[1]
       }
     }
   }
