@@ -7,10 +7,10 @@ http://tmamala.pl
 */
 
 :root{
-    --main-clr:#cfc;
+    --main-clr:#9f9;
     --text-clr:#000;
-    --box-color:#9f9;
-    --content-box: "X";
+    --box-color:#cfc;
+    --content-box: "x";
     --content-color: #4d79ff;
 }
 
@@ -106,7 +106,7 @@ body{
     font-size: 48px;
 }
 
-.box:hover::before{
+.unchecked.box:hover::before{
     content: var(--content-box);
 }
 

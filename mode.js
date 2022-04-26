@@ -1,6 +1,6 @@
 function mode() {
   let root = document.documentElement,
-      value = document.getElementById("mode").checked;
+    value = document.getElementById("mode").checked;
 
   if (value) {
     root.style.setProperty("--text-clr", "#fff");
@@ -9,8 +9,8 @@ function mode() {
     document.getElementById("labelmode").innerHTML = "Mode: &#127769;";
   } else {
     root.style.setProperty("--text-clr", "#000");
-    root.style.setProperty("--main-clr", "#cfc");
-    root.style.setProperty("--box-color", "#9f9");
+    root.style.setProperty("--main-clr", "#9f9");
+    root.style.setProperty("--box-color", "#cfc");
     document.getElementById("labelmode").innerHTML = "Mode: &#9728;&#65039;";
   }
 }
