@@ -15,7 +15,7 @@ function onLoad() {
 
 function mainFunction(field0, field1) {
   let sid = document.getElementById(`${field0}${field1}`);
-  sid.setAttribute("onclick", "");
+  sid.removeAttribute("onclick");
   field[[field0, field1]] = numberTurn;
   sid.innerHTML = `<p>${turn}</p>`;
   sid.classList.add("checked");
@@ -41,24 +41,6 @@ function winValidation(field0, field1) {
   }
 }
 
-function endAndStart(rmOnClickOrAdd) {
-  if (rmOnClickOrAdd) {
-    for (let fieldId of document.getElementsByClassName("box")) {
-      fieldId.setAttribute("onClick", "#");
-    }
-  } else {
-    for (let fieldId of [0, 1, 2, 3, 4, 5, 6, 7, 8]) {
-      document
-        .getElementById(fieldId)
-        .setAttribute("onClick", `mainFunction(${fieldId}`);
-      document.getElementById(fieldId).innerHTML = "";
-      turn = "x";
-      document.getElementById("now").innerHTML = "Tura x";
-      numberTurn = true;
-      field[fieldId] = null;
-    }
-  }
-}
 
 function rowAndColumnValidation(field0, field1) {
   let fieldSet = [],
@@ -124,4 +106,22 @@ function crossValidation(field0, field1) {
       }
     }
   }
+}
+
+
+function reset(){
+  document.querySelectorAll(".box").forEach( function(element){
+    element.setAttribute("onclick",
+    `mainFunction(${element.id.toString()[0]}, 
+          ${element.id.toString()[1]})`);
+    element.innerHTML = "";
+    element.classList.remove("checked");
+    element.classList.add("unchecked");
+  })
+
+  document.getElementById("now").innerText = 'Tura x'
+  field = [];
+  turn = 'x';
+  document.documentElement.style.setProperty("--content-box", '"x"')
+  numberTurn = true;
 }
