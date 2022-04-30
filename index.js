@@ -5,7 +5,8 @@ https://bstrama.com
 */
 let turn = "x",
   numberTurn = true,
-  field = [];
+  field = [],
+  filledFieldsNumber = 0;
 
 function onLoad() {
   mode();
@@ -24,6 +25,7 @@ function mainFunction(field0, field1) {
   turn = numberTurn ? "x" : "o";
   document.getElementById("now").innerHTML = "Tura " + turn;
   document.documentElement.style.setProperty("--content-box", `"${turn}"`);
+  filledFieldsNumber += 1;
   winValidation(field0, field1);
 }
 
@@ -38,6 +40,16 @@ function winValidation(field0, field1) {
   } else if (set.indexOf(false) + 1) {
     //endAndStart(true)
     document.getElementById("now").innerHTML = "Wygrał o";
+  }
+
+  if (filledFieldsNumber === 9) {
+    document.querySelectorAll(".last, .lastn").
+    forEach((element) => element.style.display = "flex")
+    console.log(9)
+  }else if(filledFieldsNumber === 15) {
+    document.querySelectorAll(".bigger").
+    forEach((element) => element.style.display = "flex")
+    console.log(15)
   }
 }
 
@@ -124,4 +136,5 @@ function reset(){
   turn = 'x';
   document.documentElement.style.setProperty("--content-box", '"x"')
   numberTurn = true;
+  filledFieldsNumber = 0;
 }
