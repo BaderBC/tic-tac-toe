@@ -33,23 +33,31 @@ function winValidation(field0, field1) {
   let set = [
     rowAndColumnValidation(field0, field1),
     crossValidation(field0, field1),
-  ];
+  ],
+  o = document.getElementById("points-o"),
+  x = document.getElementById("points-x")
+
   if (set.indexOf(true) + 1) {
-    //endAndStart(true)
-    document.getElementById("now").innerHTML = "Wygrał x";
+    x.innerText = parseInt(x.innerText) + 1;
   } else if (set.indexOf(false) + 1) {
-    //endAndStart(true)
-    document.getElementById("now").innerHTML = "Wygrał o";
+      o.innerText = parseInt(o.innerText) + 1;
   }
 
   if (filledFieldsNumber === 9) {
     document.querySelectorAll(".last, .lastn").
     forEach((element) => element.style.display = "flex")
-    console.log(9)
   }else if(filledFieldsNumber === 15) {
     document.querySelectorAll(".bigger").
     forEach((element) => element.style.display = "flex")
-    console.log(15)
+  }else if(filledFieldsNumber === 25){
+      let now = document.getElementById("now")
+    if ( x.innerText > o.innerText ) {
+        now.innerText = `Wygrał: x`
+    }else if(o.innerText > x.innerText){
+        now.innerText = 'Wygrało: o'
+    }else{
+        now.innerText = 'Remis'
+    }
   }
 }
 
@@ -58,6 +66,7 @@ function rowAndColumnValidation(field0, field1) {
   let fieldSet = [],
     j = 0,
     i,
+    l = 0,
     leftSide = Array(3),
     rightSide = Array(3);
 
@@ -86,6 +95,12 @@ function rowAndColumnValidation(field0, field1) {
           field[[field0 + leftSide[1], field1 + rightSide[1]]] =
           field[[field0 + leftSide[2], field1 + rightSide[2]]] =
             null;
+        for (l of [0, 1, 2]){
+          document.getElementById(`${(field0 + leftSide[l]).toString() +
+              (field1 + rightSide[l])}`).style.backgroundColor = fieldSet[0] ? "red" : "blue";
+          document.getElementById(`${(field0 + leftSide[l]).toString() +
+              (field1 + rightSide[l])}`).innerText = "";
+        }
         return fieldSet[2];
       }
     }
@@ -110,10 +125,22 @@ function crossValidation(field0, field1) {
         fieldSet.every((x) => x === true) ||
         fieldSet.every((x) => x === false)
       ) {
-        field[[field0 + 1 - c, field1 + i + c]] =
-          field[[field0 - c, field1 + c]] =
-          field[[field0 - 1 - c, field1 - i + c]] =
+        field[[field0 - 1 + l, field1 + i + c]] =
+          field[[field0 + l, field1 + c]] =
+          field[[field0 + 1 + l, field1 - i + c]] =
             null;
+        let toChange1 = document.getElementById(`${(field0 - 1 + l).toString()
+        + (field1 + i + c)}`)
+        let toChange2 = document.getElementById(`${(field0 + l).toString()
+        + (field1 + c)}`)
+        let toChange3 = document.getElementById(`${(field0 + 1 + l).toString()
+        + (field1 - i + c)}`)
+        toChange1.innerText =
+        toChange2.innerText =
+        toChange3.innerText = "";
+        toChange1.style.backgroundColor =
+        toChange2.style.backgroundColor =
+        toChange3.style.backgroundColor = fieldSet[1]? "red":"blue";
         return fieldSet[1];
       }
     }
