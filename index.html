@@ -10,31 +10,167 @@
   </head>
   <body onload="onLoad()">
     <script src="./index.js" defer></script>
-    <h1>Tic-tac-toe</h1>
-    <p id="now">Tura x</p>
-    <div id="main-div">
-      <table style="width: 100%; border: 2px solid black">
-        <tr>
-          <td onclick="mainFunction('0')" id="0" class="field"></td>
-          <td onclick="mainFunction('1')" id="1" class="field"></td>
-          <td onclick="mainFunction('2')" id="2" class="field"></td>
-        </tr>
-        <tr>
-          <td onclick="mainFunction('3')" id="3" class="field"></td>
-          <td onclick="mainFunction('4')" id="4" class="field"></td>
-          <td onclick="mainFunction('5')" id="5" class="field"></td>
-        </tr>
-        <tr>
-          <td onclick="mainFunction('6')" id="6" class="field"></td>
-          <td onclick="mainFunction('7')" id="7" class="field"></td>
-          <td onclick="mainFunction('8')" id="8" class="field"></td>
-        </tr>
-      </table>
+    <script src="./mode.js"></script>
+    <div class="header">
+      <h1>Tic-tac-toe</h1>
+      <p>Punkty: </p>
+      <p>x: </p><p>o: </p>
+      <p id="points-x">0</p><p id="points-o">0</p>
+      <p id="now">Tura x</p>
+      <div class="mode">
+        <label for="mode" id="labelmode">Mode : &#9728;&#65039;</label><br />
+        <input
+          type="checkbox"
+          name="mode"
+          id="mode"
+          autocomplete="on"
+          onclick="mode()"
+        />
+      </div>
+      <button id="reset" onclick="reset()">Click to reset !</button>
     </div>
-    <button id="reset" onclick="endAndStart(false)">Click to reset !</button>
-    <label id="mode-label" for="mode">Dark mode: </label>
-    <input onclick="mode()" name="mode" id="mode" type="checkbox">
+    <div id="main-div">
+      <div class="big-flex">
+        <div class="small-flex lastn">
+          <div
+            class="box bigger unchecked"
+            id="00"
+            onclick="mainFunction(0, 0)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="01"
+            onclick="mainFunction(0, 1)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="02"
+            onclick="mainFunction(0, 2)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="03"
+            onclick="mainFunction(0, 3)"
+          ></div>
+          <div
+            class="box bigger unchecked"
+            id="04"
+            onclick="mainFunction(0, 4)"
+          ></div>
+        </div>
 
-    <button>back <--</button><button>restore --></button>
+        <div class="small-flex first">
+          <div
+            class="box bigger unchecked"
+            id="10"
+            onclick="mainFunction(1, 0)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="11"
+            onclick="mainFunction(1, 1)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="12"
+            onclick="mainFunction(1, 2)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="13"
+            onclick="mainFunction(1, 3)"
+          ></div>
+          <div
+            class="box bigger unchecked"
+            id="14"
+            onclick="mainFunction(1, 4)"
+          ></div>
+        </div>
+
+        <div class="small-flex second">
+          <div
+            class="box bigger unchecked"
+            id="20"
+            onclick="mainFunction(2, 0)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="21"
+            onclick="mainFunction(2, 1)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="22"
+            onclick="mainFunction(2, 2)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="23"
+            onclick="mainFunction(2, 3)"
+          ></div>
+          <div
+            class="box bigger unchecked"
+            id="24"
+            onclick="mainFunction(2, 4)"
+          ></div>
+        </div>
+
+        <div class="small-flex third">
+          <div
+            class="box bigger unchecked"
+            id="30"
+            onclick="mainFunction(3, 0)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="31"
+            onclick="mainFunction(3, 1)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="32"
+            onclick="mainFunction(3, 2)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="33"
+            onclick="mainFunction(3, 3)"
+          ></div>
+          <div
+            class="box bigger unchecked"
+            id="34"
+            onclick="mainFunction(3, 4)"
+          ></div>
+        </div>
+
+        <div class="small-flex last">
+          <div
+            class="box bigger unchecked"
+            id="40"
+            onclick="mainFunction(4, 0)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="41"
+            onclick="mainFunction(4, 1)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="42"
+            onclick="mainFunction(4, 2)"
+          ></div>
+          <div
+            class="box smalls unchecked"
+            id="43"
+            onclick="mainFunction(4, 3)"
+          ></div>
+          <div
+            class="box bigger unchecked"
+            id="44"
+            onclick="mainFunction(4, 4)"
+          ></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

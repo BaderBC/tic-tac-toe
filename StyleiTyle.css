@@ -1,54 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
 /*
 Made by Tomasz Mamala
 
-https://tmamala.pl
+http://tmamala.pl
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+:root{
+    --main-clr:#9f9;
+    --text-clr:#000;
+    --box-color:#cfc;
+    --content-box: "x";
+    --content-color: #4d79ff;
+}
 
 body{
-    background-color: #cfc;
-    color: black;
+    background-color: var(--main-clr);
     width: 100%;
     height: 100%;
     margin: 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     font-family: 'Raleway', sans-serif;
     font-size: 25px;
+    padding-top: 5rem;
+    color: var(--text-clr);
+}
+
+.header{
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 #main-div{
-    background-color: rgba(77, 252, 252, 0.178);
-    width: 600px;
-    height: 600px;
-    z-index: 0;
+    width: 800px;
+    height: 800px;
 }
 
-#main-div div{
-    border: 2px solid green;
-    height: 200px;
-    width: 200px;
+.big-flex{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-clr);
 }
 
-table{
-    height: 600px;
-    border-spacing: 0;
-    border-color: transparent;
+.small-flex{
+    width: 100%;
+    min-height: 160px;
+    height: calc(100% /3);
+    border:1rem solid var(--main-clr);
+    box-sizing: border-box;
+    display: flex;
 }
 
-td{
-    border: 2px solid black;
+.first{
+    border-top: none;
+}
+
+.second{
+    border-top: none;
+}
+
+.third{
+    border-top: none;
+}
+
+.last{
+    border-top: none;
+}
+
+.lastn{
+    border-top: none;
+}
+
+.bigger, .last, .lastn{
+    display: none;
+}
+
+.box{
+    box-sizing: border-box;
+    border-right: .5rem solid var(--main-clr);
+    border-left: .5rem solid var(--main-clr);
+    width: calc(100% /3);
+    min-width: 20%;
+    height: 100%;
+    background-color: var(--box-color);
     text-align: center;
-    width: 33%;
-    height: 180px;
-    font-size: 35px;
+    font-size: 48px;
+    position: relative;
+    font-weight: bold;
+}
+
+.box::before{
+    text-align:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--box-color);
+    font-weight: bold;
+    font-size: 48px;
+}
+
+.unchecked.box:hover::before{
+    content: var(--content-box);
+}
+
+.box > p{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #reset{
-    background-color: gray;
+    background-color: transparent;
     border-radius: 100px;
     border: 2px solid black;
     box-sizing: border-box;
@@ -56,8 +128,10 @@ td{
     cursor: pointer;
     margin-top: 25px;
     font-size: 20px;
-    color: white;
-    transition: 400ms ease-in-out;
+    color: var(--text-clr);
+    transition: 200ms ease-in-out;
+    position: relative;
+    top: 0;
 }
 
 p{
@@ -73,10 +147,18 @@ h1{
 }
 
 #reset:hover{
-    background-color: white;
-    color: black;
-    -webkit-transition: background-color 400ms linear;
-    -ms-transition: background-color 400ms linear;
-    margin-top: 20px;
-    transition: 400ms ease-in-out;
+    background-color: var(--box-color);
+    -webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+    transition: 200ms ease-in-out;
+    top: -5px;
+}
+
+#mode{
+    display: none;
+}
+
+#labelmode{
+    cursor: pointer;
 }
