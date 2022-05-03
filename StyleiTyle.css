@@ -162,3 +162,9 @@ h1{
 #labelmode{
     cursor: pointer;
 }
+
+.x, .o{
+    display: flex;
+    justify-content: space-between;
+    width: 50px;
+}
