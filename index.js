@@ -97,12 +97,8 @@ function rowAndColumnValidation(field0, field1) {
           field[[field0 + leftSide[2], field1 + rightSide[2]]] =
             null;
         for (l of [0, 1, 2]) {
-          document.getElementById(
-            `${(field0 + leftSide[l]).toString() + (field1 + rightSide[l])}`
-          ).style.opacity = fieldSet[0] ? "0" : "0";
-          document.getElementById(
-            `${(field0 + leftSide[l]).toString() + (field1 + rightSide[l])}`
-          ).innerText = "";
+            fieldWinParameters(`${(field0 + leftSide[l]).toString() 
+            + (field1 + rightSide[l])}`, fieldSet[0])
         }
         return fieldSet[2];
       }
@@ -151,6 +147,15 @@ function crossValidation(field0, field1) {
     }
   }
 }
+
+
+function fieldWinParameters(id, isXorO){
+  let element = document.getElementById(id)
+  element.style.backgroundColor = isXorO? "rgba(181, 143, 143, 0.15)" : "rgba(143, 181, 178, 0.15)";
+  element.style.borderRadius = "15px"
+  element.style.color = "#5b8c59"
+}
+
 
 function reset() {
   document.querySelectorAll(".box").forEach(function (element) {
