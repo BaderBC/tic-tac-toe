@@ -110,7 +110,8 @@ function crossValidation(field0, field1) {
   let fieldSet = [],
     i,
     c,
-    l;
+    l,
+    i2;
 
   for (c of [-1, 0, 1]) {
     for (i of [-1, 1]) {
@@ -126,22 +127,16 @@ function crossValidation(field0, field1) {
       ) {
         field[[field0 - 1 + l, field1 + i + c]] =
           field[[field0 + l, field1 + c]] =
-          field[[field0 + 1 + l, field1 - i + c]] =
-            null;
-        let toChange1 = document.getElementById(
-          `${(field0 - 1 + l).toString() + (field1 + i + c)}`
-        );
-        let toChange2 = document.getElementById(
-          `${(field0 + l).toString() + (field1 + c)}`
-        );
-        let toChange3 = document.getElementById(
-          `${(field0 + 1 + l).toString() + (field1 - i + c)}`
-        );
-        toChange1.innerText = toChange2.innerText = toChange3.innerText = "";
-        toChange1.style.opacity =
-          toChange2.style.opacity =
-          toChange3.style.opacity =
-            fieldSet[1] ? "0" : "0";
+            field[[field0 + 1 + l, field1 - i + c]] =
+              null;
+
+        for (i2 of [
+          `${(field0 - 1 + l).toString() + (field1 + i + c)}`,
+          `${(field0 + l).toString() + (field1 + c)}`,
+          `${(field0 + 1 + l).toString() + (field1 - i + c)}`]) {
+          fieldWinParameters(i2, fieldSet[0])
+        }
+
         return fieldSet[1];
       }
     }
@@ -167,6 +162,13 @@ function reset() {
     element.innerHTML = "";
     element.classList.remove("checked");
     element.classList.add("unchecked");
+    element.style.color = "black";
+    element.style.borderRadius = "0px";
+    element.style.backgroundColor = "white"
+  });
+
+  document.querySelectorAll(".last, .lastn, .bigger").forEach(function (element){
+    element.style.display = "none";
   });
 
   document.getElementById("now").innerText = "Tura x";
@@ -175,4 +177,6 @@ function reset() {
   document.documentElement.style.setProperty("--content-box", '"x"');
   numberTurn = true;
   filledFieldsNumber = 0;
+  document.getElementById("points-x").innerText = "0";
+  document.getElementById("points-o").innerText = "0";
 }
