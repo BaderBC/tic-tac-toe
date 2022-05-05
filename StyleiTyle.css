@@ -61,6 +61,10 @@ body{
     border-top: none;
 }
 
+.bigger, .last, .lastn{
+    display: none;
+}
+
 .box{
     box-sizing: border-box;
     border-right: .5rem solid var(--main-clr);
