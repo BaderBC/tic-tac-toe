@@ -163,8 +163,17 @@ h1{
     cursor: pointer;
 }
 
-.x, .o{
+.points, .x, .o{
     display: flex;
     justify-content: space-between;
-    width: 50px;
+}
+
+.x, .o{
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.x > p, .o > p{
+    margin-bottom: 0;
 }

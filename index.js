@@ -97,8 +97,10 @@ function rowAndColumnValidation(field0, field1) {
           field[[field0 + leftSide[2], field1 + rightSide[2]]] =
             null;
         for (l of [0, 1, 2]) {
-            fieldWinParameters(`${(field0 + leftSide[l]).toString() 
-            + (field1 + rightSide[l])}`, fieldSet[0])
+          fieldWinParameters(
+            `${(field0 + leftSide[l]).toString() + (field1 + rightSide[l])}`,
+            fieldSet[0]
+          );
         }
         return fieldSet[2];
       }
@@ -127,14 +129,15 @@ function crossValidation(field0, field1) {
       ) {
         field[[field0 - 1 + l, field1 + i + c]] =
           field[[field0 + l, field1 + c]] =
-            field[[field0 + 1 + l, field1 - i + c]] =
-              null;
+          field[[field0 + 1 + l, field1 - i + c]] =
+            null;
 
         for (i2 of [
           `${(field0 - 1 + l).toString() + (field1 + i + c)}`,
           `${(field0 + l).toString() + (field1 + c)}`,
-          `${(field0 + 1 + l).toString() + (field1 - i + c)}`]) {
-          fieldWinParameters(i2, fieldSet[0])
+          `${(field0 + 1 + l).toString() + (field1 - i + c)}`,
+        ]) {
+          fieldWinParameters(i2, fieldSet[0]);
         }
 
         return fieldSet[1];
@@ -143,14 +146,14 @@ function crossValidation(field0, field1) {
   }
 }
 
-
-function fieldWinParameters(id, isXorO){
-  let element = document.getElementById(id)
-  element.style.backgroundColor = isXorO? "rgba(181, 143, 143, 0.15)" : "rgba(143, 181, 178, 0.15)";
-  element.style.borderRadius = "15px"
-  element.style.color = "#5b8c59"
+function fieldWinParameters(id, isXorO) {
+  let element = document.getElementById(id);
+  element.style.backgroundColor = isXorO
+    ? "rgba(181, 143, 143, 0.15)"
+    : "rgba(143, 181, 178, 0.15)";
+  element.style.borderRadius = "15px";
+  element.style.color = "#5b8c59";
 }
-
 
 function reset() {
   document.querySelectorAll(".box").forEach(function (element) {
@@ -164,12 +167,14 @@ function reset() {
     element.classList.add("unchecked");
     element.style.color = "black";
     element.style.borderRadius = "0px";
-    element.style.backgroundColor = "white"
+    element.style.backgroundColor = "var(--box-color)";
   });
 
-  document.querySelectorAll(".last, .lastn, .bigger").forEach(function (element){
-    element.style.display = "none";
-  });
+  document
+    .querySelectorAll(".last, .lastn, .bigger")
+    .forEach(function (element) {
+      element.style.display = "none";
+    });
 
   document.getElementById("now").innerText = "Tura x";
   field = [];
