@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
 /*
 Made by Tomasz Mamala
@@ -134,10 +135,17 @@ body{
     top: 0;
 }
 
+#more-than{
+    margin-top: 10px;
+    margin-left: -80px;
+    transform: rotate(-20deg)
+}
+
 p{
     margin-block-start: 0;
     margin-block-end: 0;
     margin-bottom: 2rem;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 h1{
