@@ -41,6 +41,11 @@ io.on('connection', (socket) => {
     socket.on('move', (moveObject) => {
         mainFunction(moveObject.f0, moveObject.f1)
     })
+
+    socket.conn.on('close', (reason) => {
+        reset();
+        console.log(`Connection lost because of: ${reason}`)
+    })
 })
 
 httpServer.listen(PORT, () => {
