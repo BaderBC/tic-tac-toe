@@ -28,6 +28,7 @@ socket.on('objectReturn', (toChangeObject) => {
     let sid = document.getElementById(`${toChangeObject.f0}${toChangeObject.f1}`),
         filledFieldsNumber = toChangeObject.filledFielsNumber;
 
+
     sid.removeAttribute('onclick');
     sid.innerHTML = `<p>${turn}</p>`
     sid.classList.add('checked')
@@ -56,20 +57,27 @@ socket.on('objectReturn', (toChangeObject) => {
     }
 })
 
-socket.on('functionToEmit', (fName, data1, data2) => {
+socket.on('functionToEmit', (fName, data) => {
     switch (fName) {
-        case 'fieldWinParameters': fieldWinParameters(data1, data2)
+        case 'fieldWinParameters': fieldWinParameters(data[0], data[1]);
+        break;
+        case 'add-points':
+            data[0]?
+                x.innerText++:
+                o.innerText++;
+        break;
     }
 })
 
 
 function fieldWinParameters(id, isXorO) {
-    let element = document.getElementById(id);
+    let element = document.getElementById(parseInt(id));
     element.style.backgroundColor = isXorO
         ? "rgba(181, 143, 143, 0.15)"
         : "rgba(143, 181, 178, 0.15)";
     element.style.borderRadius = "15px";
     element.style.color = "#5b8c59";
+
 }
 
 function reset(){
