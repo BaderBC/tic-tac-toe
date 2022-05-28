@@ -10,8 +10,7 @@ const express = require('express'),
     httpServer = http.createServer(app),
     socketIO = require('socket.io'),
     io = new socketIO.Server(httpServer),
-    PORT = 8080,
-    EventEmitter = require('events');
+    PORT = 8080;
 
 
 app.use(express.static('game-front-end'))
@@ -24,22 +23,14 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
 
-    socket.on('functionToEmit-server', (fName) => {
+    socket.on('functionToEmit-server', (fName, data) => {
         switch (fName){
             case 'reset': reset();
-
+            break;
+            case 'move': mainFunction(data[0], data[1]);
+            break;
         }
     })
-
-    socket.on('move', (moveObject) => {
-        mainFunction(moveObject.f0, moveObject.f1)
-    })
-
-    socket.conn.on('close', (reason) => {
-        reset();
-        console.log(`Connection lost because of: ${reason}`)
-    })
-
 
 
 
@@ -166,6 +157,7 @@ io.on('connection', (socket) => {
         turn = "x";
         numberTurn = true;
         filledFieldsNumber = 0;
+        objectToReturn = {};
     }
 
 })

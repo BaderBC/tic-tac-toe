@@ -18,10 +18,10 @@ function onLoad(){
 }
 
 function mainFunction(field0, field1){
-    socket.emit('move', {
-        f0: field0,
-        f1: field1
-    })
+    socket.emit('functionToEmit-server', 'move', [
+        field0,
+        field1
+    ])
 }
 
 socket.on('objectReturn', (toChangeObject) => {
@@ -30,6 +30,7 @@ socket.on('objectReturn', (toChangeObject) => {
 
 
     sid.removeAttribute('onclick');
+    console.log(turn);
     sid.innerHTML = `<p>${turn}</p>`
     sid.classList.add('checked')
     sid.classList.remove('unchecked')
@@ -81,6 +82,7 @@ function fieldWinParameters(id, isXorO) {
 }
 
 function reset(){
+    turn = 'x';
     document.querySelectorAll(".box").forEach((element) => {
         element.setAttribute(
             "onclick",
