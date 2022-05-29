@@ -30,7 +30,6 @@ socket.on('objectReturn', (toChangeObject) => {
 
 
     sid.removeAttribute('onclick');
-    console.log(turn);
     sid.innerHTML = `<p>${turn}</p>`
     sid.classList.add('checked')
     sid.classList.remove('unchecked')
@@ -49,24 +48,31 @@ socket.on('objectReturn', (toChangeObject) => {
     } else if (filledFieldsNumber === 25) {
         let now = document.getElementById("now");
         if (x.innerText > o.innerText) {
-            now.innerText = `Wygrał: x`;
+            now.innerText = `!X WIN!`;
         } else if (o.innerText > x.innerText) {
-            now.innerText = "Wygrało: o";
+            now.innerText = "!O WIN!";
         } else {
-            now.innerText = "Remis";
+            now.innerText = "DRAW";
         }
     }
 })
 
 socket.on('functionToEmit', (fName, data) => {
     switch (fName) {
-        case 'fieldWinParameters': fieldWinParameters(data[0], data[1]);
-        break;
+        case 'fieldWinParameters':
+            fieldWinParameters(data[0], data[1]);
+            break;
         case 'add-points':
             data[0]?
                 x.innerText++:
                 o.innerText++;
-        break;
+            break;
+        case 'playAs':
+            document.getElementById('playAs').innerText = `Grasz jako: ${data[0]}`;
+            break;
+        case 'reset':
+            frontEndReset()
+            break;
     }
 })
 
@@ -82,6 +88,11 @@ function fieldWinParameters(id, isXorO) {
 }
 
 function reset(){
+    socket.emit('functionToEmit-server', 'reset');
+}
+
+function frontEndReset(){
+    //document.getElementById('playAs').innerText = 'Waiting for opponent';
     turn = 'x';
     document.querySelectorAll(".box").forEach((element) => {
         element.setAttribute(
@@ -107,5 +118,4 @@ function reset(){
     document.documentElement.style.setProperty("--content-box", '"x"');
     document.getElementById("points-x").innerText = "0";
     document.getElementById("points-o").innerText = "0";
-    socket.emit('functionToEmit-server', 'reset')
 }

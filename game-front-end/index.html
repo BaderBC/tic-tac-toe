@@ -17,15 +17,16 @@
       <h1>tic-tac-toe</h1>
       <div class="points">
         <div class="x">
-          <p>Punkty x:</p>
+          <p>x points:</p>
           <p id="points-x">0</p>
         </div>
         <div class="o">
-          <p>Punkty o:</p>
+          <p>o points:</p>
           <p id="points-o">0</p>
         </div>
       </div>
-      <p id="now">Tura x</p>
+      <p id="playAs">Waiting for opponent</p>
+      <p id="now">x turn</p>
       <div class="mode">
         <label for="mode" id="labelmode">Mode: &#9728;&#65039;</label><br />
         <input
@@ -36,7 +37,7 @@
           onclick="mode()"
         />
       </div>
-      <button id="reset" onclick="reset()">Click to reset !</button>
+      <button id="reset" onclick="reset()">Click to reset!</button>
     </div>
     <div id="main-div">
       <div class="big-flex">
