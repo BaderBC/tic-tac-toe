@@ -26,14 +26,15 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
 
-    let turn,
+    let turn = 'x',
         defaultTurn,
         numberTurn = true,
         field = [],
         filledFieldsNumber = 0,
         objectToReturn = {},
         room,
-        randomTurn = Math.floor(Math.random() + 1)? 'x':'o';
+        randomTurn = Math.floor(Math.random() + 1)? 'x':'o',
+        actualIndex;
 
     //searching for opponent:
 
@@ -41,8 +42,7 @@ io.on('connection', (socket) => {
     function searchingOpponent() {
         try {
             players.forEach((element, index) => {
-                console.log(element)
-                if (element === undefined || element === null) {
+                if (element === null) {
                     room = `room${index}`;
                     players.push(null);
                     players[index] = {
@@ -50,19 +50,18 @@ io.on('connection', (socket) => {
                         isFull: false,
                         turn: randomTurn
                     };
-                    socket.join(room);
-                    turn = randomTurn;
-                    defaultTurn = turn;
-                    console.log(players);
+                    //socket.join(room);
+                    defaultTurn = randomTurn;
+                    actualIndex = index;
                     throw breakObject;
-                } else if (element.isFull === false) {
-                    element['isFull'] = true;
-                    turn = element['turn'] === 'x' ? 'o' : 'x';
-                    defaultTurn = turn;
+                } else if (players[index].isFull === false) {
+                    players[index].isFull = true;
+                    defaultTurn = element['turn'] === 'x' ? 'o' : 'x';
                     room = `room${index}`
-                    socket.join(room);
+                    //socket.join(room);
                     serverSideCommunication.emit(room, 'full')
                     socket.emit('functionToEmit', 'playAs', [defaultTurn])
+                    actualIndex = index;
                     throw breakObject;
                 }
             })
@@ -94,6 +93,8 @@ io.on('connection', (socket) => {
                 reset();
                 socket.emit('functionToEmit', 'reset')
                 break;
+            case 'connection lost':
+
         }
     })
 
@@ -107,7 +108,7 @@ io.on('connection', (socket) => {
                 serverSideCommunication.emit(room, 'reset');
                 break;
             case 'move':
-                if (turn === defaultTurn){
+                if (turn === defaultTurn && players[actualIndex].isFull === true){
                 serverSideCommunication.emit(room, 'move', data)
                 }
                 break;
@@ -117,6 +118,10 @@ io.on('connection', (socket) => {
     //after disconnecting:
     socket.conn.on('close', () => {
         //Coming soon ;)
+        serverSideCommunication.emit(room, 'connection lost');
+        players[actualIndex] = null;
+        serverSideCommunication.emit(room, 'reset');
+        room = null;
     })
 
 
@@ -136,14 +141,13 @@ io.on('connection', (socket) => {
     }
 
     function winValidation(field0, field1) {
-        for (let set of [
+        let set = [
             rowAndColumnValidation(field0, field1),
             crossValidation(field0, field1)
-        ]) {
-            if (set !== undefined) {
-                socket.emit('functionToEmit', 'add-points', [set])
+        ]
+            if (set[0] !== undefined || set[1] !== undefined) {
+                socket.emit('functionToEmit', 'add-points', set)
             }
-        }
     }
 
     function rowAndColumnValidation(field0, field1) {
@@ -180,7 +184,7 @@ io.on('connection', (socket) => {
                             field[[field0 + leftSide[2], field1 + rightSide[2]]] =
                                 null;
                     for (l of [0, 1, 2]) {
-                        socket.emit('functionToEmit', 'fieldWinParameters',[
+                        socket.emit('functionToEmit', 'fieldWinParameters', [
                             `${(field0 + leftSide[l]).toString() + (field1 + rightSide[l])}`,
                             fieldSet[0]
                         ])
@@ -220,7 +224,10 @@ io.on('connection', (socket) => {
                         `${(field0 + l).toString() + (field1 + c)}`,
                         `${(field0 + 1 + l).toString() + (field1 - i + c)}`,
                     ]) {
-                        socket.emit('functionToEmit', 'fieldWinParameters' , i2, fieldSet[0]);
+                        socket.emit('functionToEmit', 'fieldWinParameters', [
+                            i2,
+                            fieldSet[0]
+                        ]);
                     }
 
                     return fieldSet[1];
@@ -237,7 +244,6 @@ io.on('connection', (socket) => {
         filledFieldsNumber = 0;
         objectToReturn = {};
         randomTurn = Math.floor(Math.random() + 1)? 'x':'o';
-        room = undefined;
     }
 
 })

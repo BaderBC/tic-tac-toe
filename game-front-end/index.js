@@ -9,7 +9,8 @@ const socket = io();
 let now = document.getElementById('now'),
     x = document.getElementById('points-x'),
     o = document.getElementById('points-o'),
-    turn = 'x';
+    turn = 'x',
+    defaultTurn;
 
 function onLoad(){
     mode();
@@ -27,7 +28,6 @@ function mainFunction(field0, field1){
 socket.on('objectReturn', (toChangeObject) => {
     let sid = document.getElementById(`${toChangeObject.f0}${toChangeObject.f1}`),
         filledFieldsNumber = toChangeObject.filledFielsNumber;
-
 
     sid.removeAttribute('onclick');
     sid.innerHTML = `<p>${turn}</p>`
@@ -64,15 +64,19 @@ socket.on('functionToEmit', (fName, data) => {
             break;
         case 'add-points':
             data[0]?
-                x.innerText++:
-                o.innerText++;
+                o.innerText++:
+                x.innerText++;
             break;
         case 'playAs':
             document.getElementById('playAs').innerText = `Grasz jako: ${data[0]}`;
+            defaultTurn = data[0];
             break;
         case 'reset':
             frontEndReset()
             break;
+        case 'disconnect':
+            document.getElementById('now').innerText
+                = `${defaultTurn} (you) wins due to the disconnection of the opponent`;
     }
 })
 
