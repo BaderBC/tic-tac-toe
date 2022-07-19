@@ -168,3 +168,24 @@ h1{
 .x > p, .o > p{
     margin-bottom: 0;
 }
+
+@media only screen and (max-width: 400px){
+    body{
+        flex-direction: column-reverse;
+        row-gap: 2rem;
+    }
+
+    .box, .box::before{
+        font-size: 25px;
+    }
+
+    #more-than{
+        font-size: 15px;
+        margin-left: -40px;
+    }
+
+    #main-div{
+        width: 300px;
+        height: 300px;
+    }
+}
